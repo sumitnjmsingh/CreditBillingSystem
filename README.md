@@ -484,7 +484,6 @@ The backend server will start at:
 ```
 http://localhost:9000
 ```
-```
 
 ---
 
