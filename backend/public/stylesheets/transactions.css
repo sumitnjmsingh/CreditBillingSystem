@@ -1,0 +1,101 @@
+body {
+    background: #f4f7fb;
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.transaction-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-section h1 {
+    color: #1e293b;
+    margin-bottom: 10px;
+    font-size: 2.4rem;
+}
+
+.header-section p {
+    color: #64748b;
+}
+
+.table-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #0f172a;
+    color: white;
+}
+
+thead th {
+    padding: 18px;
+    text-align: left;
+}
+
+tbody td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+    transition: 0.3s;
+}
+
+.amount {
+    font-weight: bold;
+    color: #16a34a;
+}
+
+.merchant {
+    font-weight: 600;
+    color: #334155;
+}
+
+.empty-box {
+    text-align: center;
+    background: white;
+    padding: 60px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.empty-box h2 {
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.empty-box p {
+    color: #64748b;
+}
+
+@media (max-width: 768px) {
+
+    .table-card {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 800px;
+    }
+
+    .header-section h1 {
+        font-size: 2rem;
+    }
+}

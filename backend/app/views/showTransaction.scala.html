@@ -1,0 +1,66 @@
+@(transactions: List[models.Transaction])
+
+@main("My Transactions") {
+
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/transactions.css")">
+
+    <div class="transaction-container">
+
+        <div class="header-section">
+            <h1>Transaction History</h1>
+            <p>All transactions associated with your cards</p>
+        </div>
+
+        @if(transactions.isEmpty) {
+
+            <div class="empty-box">
+                <h2>No Transactions Found</h2>
+                <p>Your transaction history will appear here.</p>
+            </div>
+
+        } else {
+
+            <div class="table-card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Card ID</th>
+                            <th>Merchant</th>
+                            <th>Amount</th>
+                            <th>Transaction Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    @for(transaction <- transactions) {
+                        <tr>
+                            <td>#@transaction.getTransactionId()</td>
+
+                            <td>
+                           @transaction.getCard().getCardId()
+                           </td>
+
+                            <td class="merchant">
+                            @transaction.getMerchantName()
+                            </td>
+
+                            <td class="amount">
+                            ₹@("%.2f".format(transaction.getAmount()))
+                        </td>
+
+                            <td>
+                            @transaction.getTransactionDate()
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+
+                </table>
+            </div>
+
+        }
+
+    </div>
+
+}

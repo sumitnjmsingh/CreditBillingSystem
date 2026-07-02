@@ -1,0 +1,99 @@
+@(cards: List[models.CreditCard])
+
+@main("My Credit Cards") {
+
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/cards.css")">
+
+    <div class="dashboard">
+
+
+        <div class="dashboard-header">
+            <h1>My Credit Cards</h1>
+            <p>Manage your credit cards and spending</p>
+        </div>
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+                <span>Total Cards</span>
+                <h2>@cards.size()</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Total Credit Limit</span>
+                <h2>
+@*                    ₹ @cards.map(_.getCardLimit()).sum*@
+                </h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Total Utilized</span>
+                <h2>
+@*                    ₹ @cards.map(_.getLimitUsed()).sum*@
+                </h2>
+            </div>
+
+        </div>
+
+        <div class="cards-grid">
+
+        @for(card <- cards) {
+
+            <div class="credit-card">
+
+                <div class="card-top">
+                    <span class="chip"></span>
+
+                    @if(card.isBlocked()) {
+                        <span class="status blocked">Blocked</span>
+                    } else {
+                        <span class="status active">Active</span>
+                    }
+                </div>
+
+                <div class="card-number">
+            **** **** **** @card.getCardNumber())
+        </div>
+
+                <div class="holder">
+                @card.getCardHolderName()
+                </div>
+
+                <div class="limits">
+                    <div>
+                        <small>Limit</small>
+                        <strong>₹ @card.getCreditLimit()</strong>
+                    </div>
+
+                    <div>
+                        <small>Used</small>
+                        <strong>₹ @card.getUsedLimit()</strong>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill"
+                    style="width:@((card.getUsedLimit() * 100) / card.getCreditLimit())%">
+            </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-primary">
+                Transactions
+                    </button>
+
+                    <button class="btn btn-secondary">
+                Details
+                    </button>
+                </div>
+
+            </div>
+
+        }
+
+        </div>
+
+
+    </div>
+
+}
