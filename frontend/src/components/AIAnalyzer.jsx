@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from "../api/axios"
 import ReactMarkdown from "react-markdown";
 import {
   Bot,
@@ -21,7 +21,7 @@ export default function AIAnalyzer() {
     setError("");
 
     try {
-      const response = await axios.get("http://localhost:9000/aiAnalysis");
+      const response = await axios.get("/aiAnalysis");
 
       setAnalysis(response.data.analysis);
     } catch (err) {
