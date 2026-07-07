@@ -1,0 +1,47 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+    container_name: credit-billing
+
+    ports:
+      - "9000:9000"
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: credit-frontend
+
+    ports:
+      - "5173:5173"
+
+    depends_on:
+      - backend
+
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: sumit_iitm
+      MYSQL_DATABASE: credit_card_db
+
+    ports:
+      - "3306:3306"
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-psumit_iitm"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+    restart: unless-stopped

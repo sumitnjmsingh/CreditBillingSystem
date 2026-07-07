@@ -1,0 +1,14 @@
+.idea
+backend/.bsp
+backend/.idea
+backend/.g8
+backend/logs
+backend/target
+backend/conf/application.conf
+
+
+frontend/node_modules
+frontend/dist
+frontend/.env
+
+
