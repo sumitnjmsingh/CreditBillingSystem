@@ -38,6 +38,9 @@ services:
     ports:
       - "3306:3306"
 
+    volumes:
+      - mysql-data:/var/lib/mysql
+
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-psumit_iitm"]
       interval: 10s
@@ -45,3 +48,6 @@ services:
       retries: 10
 
     restart: unless-stopped
+
+volumes:
+  mysql-data:
