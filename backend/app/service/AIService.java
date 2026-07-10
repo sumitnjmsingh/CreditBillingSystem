@@ -16,9 +16,7 @@ import com.typesafe.config.ConfigFactory;
 
 public class AIService {
 
-    private static final Config config = ConfigFactory.load();
-
-    private static final String API_KEY = config.getString("API_KEY");
+    private static final String API_KEY = System.getenv("API_KEY");
 
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
 

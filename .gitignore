@@ -5,6 +5,7 @@ backend/.g8
 backend/logs
 backend/target
 backend/conf/application.conf
+.env
 
 
 frontend/node_modules
