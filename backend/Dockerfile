@@ -1,4 +1,4 @@
-FROM sumitnjmsingh/play25-builder:1.0 AS builder
+FROM sumitnjmsingh/play25-builder:1.1 AS builder
 
 WORKDIR /app
 

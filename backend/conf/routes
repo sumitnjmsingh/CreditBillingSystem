@@ -3,33 +3,33 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET           /                                      controllers.HomeController.index()
+GET           /api/                                      controllers.HomeController.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
-GET           /card/:id/transactions                 controllers.CardController.getAllTransaction(id: Long)
-GET           /card/:cardId/totalTransactions        controllers.CardController.getTotalTransactionAmount(cardId: Long)
-GET           /cards                                 controllers.CardController.showAllCards
-GET           /card/:cardId/statement                controllers.BillingController.generateMonthlyStatements(cardId: Long)
-GET           /card/:cardId/availableLimit           controllers.CardController.getAvailableLimit(cardId : Long)
-GET           /transactions                          controllers.CardController.searchTransactions()
-GET           /transactions/download/csv             controllers.CardController.downloadCSV()
-GET           /transactions/download/pdf             controllers.CardController.downloadPDF()
-GET           /card/:cardId/rewardBalance            controllers.RewardController.rewardBalance(cardId : Long)
-GET           /aiAnalysis                            controllers.LogController.analyzeLogs()
+GET           /api/assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
+GET           /api/card/:id/transactions                 controllers.CardController.getAllTransaction(id: Long)
+GET           /api/card/:cardId/totalTransactions        controllers.CardController.getTotalTransactionAmount(cardId: Long)
+GET           /api/cards                                 controllers.CardController.showAllCards
+GET           /api/card/:cardId/statement                controllers.BillingController.generateMonthlyStatements(cardId: Long)
+GET           /api/card/:cardId/availableLimit           controllers.CardController.getAvailableLimit(cardId : Long)
+GET           /api/transactions                          controllers.CardController.searchTransactions()
+GET           /api/transactions/download/csv             controllers.CardController.downloadCSV()
+GET           /api/transactions/download/pdf             controllers.CardController.downloadPDF()
+GET           /api/card/:cardId/rewardBalance            controllers.RewardController.rewardBalance(cardId : Long)
+GET           /api/aiAnalysis                            controllers.LogController.analyzeLogs()
 
-POST          /signup                                controllers.UserController.signUp()
-POST          /signin                                controllers.UserController.signIn()
-POST          /card/createCard                       controllers.CardController.addCard()
-POST          /completePayment                       controllers.CardController.completePayment()
-POST          /forgot-password                       controllers.UserController.forgotPassword()
-POST          /reset-password                        controllers.UserController.resetPassword()
-POST          /change-password                       controllers.UserController.changePassword()
-POST          /payment/:cardNumber/payBill           controllers.PaymentController.payBill(cardNumber : String)
-POST          /addLogs                               controllers.LogController.addLogs()
+POST          /api/signup                                controllers.UserController.signUp()
+POST          /api/signin                                controllers.UserController.signIn()
+POST          /api/card/createCard                       controllers.CardController.addCard()
+POST          /api/completePayment                       controllers.CardController.completePayment()
+POST          /api/forgot-password                       controllers.UserController.forgotPassword()
+POST          /api/reset-password                        controllers.UserController.resetPassword()
+POST          /api/change-password                       controllers.UserController.changePassword()
+POST          /api/payment/:cardNumber/payBill           controllers.PaymentController.payBill(cardNumber : String)
+POST          /api/addLogs                               controllers.LogController.addLogs()
 
-PUT           /card/:cardId/block                    controllers.CardController.blockCard(cardId : Long)
-PUT           /card/:cardId/unblock                  controllers.CardController.unBlockCard(cardId : Long)
-PUT           /profile/update                        controllers.UserController.updateProfile()
+PUT           /api/card/:cardId/block                    controllers.CardController.blockCard(cardId : Long)
+PUT           /api/card/:cardId/unblock                  controllers.CardController.unBlockCard(cardId : Long)
+PUT           /api/profile/update                        controllers.UserController.updateProfile()
 
-DELETE        /card/:cardId                          controllers.CardController.deleteCard(cardId : Long)
+DELETE        /api/card/:cardId                          controllers.CardController.deleteCard(cardId : Long)

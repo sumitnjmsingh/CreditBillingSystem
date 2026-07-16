@@ -1,140 +1,7 @@
-#services:
-#
-#  backend:
-#    build:
-#      context: ./backend
-#    container_name: credit-backend
-#
-#    environment:
-#      MAIL_USERNAME: ${MAIL_USERNAME}
-#      MAIL_PASSWORD: ${MAIL_PASSWORD}
-#      API_KEY: ${API_KEY}
-#      JWT_SECRET: ${JWT_SECRET}
-#      PLAY_CRYPTO_SECRET: ${PLAY_CRYPTO_SECRET}
-#      DB_URL: ${DB_URL}
-#      DB_USERNAME: ${DB_USERNAME}
-#      DB_PASSWORD: ${DB_PASSWORD}
-#      OTEL_SERVICE_NAME: credit-billing
-#      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
-#      OTEL_EXPORTER_OTLP_PROTOCOL: grpc
-#      OTEL_TRACES_EXPORTER: otlp
-#      OTEL_METRICS_EXPORTER: otlp
-#      OTEL_LOGS_EXPORTER: otlp
-#
-#    ports:
-#      - "9000:9000"
-#
-#    depends_on:
-#      mysql:
-#        condition: service_healthy
-#      otel-collector:
-#        condition: service_started
-#
-#    restart: unless-stopped
-#
-#  frontend:
-#    build:
-#      context: ./frontend
-#    container_name: credit-frontend
-#
-#    ports:
-#      - "5173:5173"
-#
-#    depends_on:
-#      - backend
-#
-#    restart: unless-stopped
-#
-#  mysql:
-#    image: mysql:8.0
-#    container_name: mysql
-#
-#    environment:
-#      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-#      MYSQL_DATABASE: ${MYSQL_DATABASE}
-#
-#    ports:
-#      - "3306:3306"
-#
-#    volumes:
-#      - mysql-data:/var/lib/mysql
-#
-#    healthcheck:
-#      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p$MYSQL_ROOT_PASSWORD"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 10
-#
-#    restart: unless-stopped
-#
-#  clickhouse:
-#    image: clickhouse/clickhouse-server:latest
-#    container_name: clickhouse
-#
-#    ports:
-#      - "8123:8123"
-#      - "9001:9000"
-#
-#    environment:
-#      CLICKHOUSE_DB: otel
-#      CLICKHOUSE_USER: otel
-#      CLICKHOUSE_PASSWORD: otel123
-#
-#    volumes:
-#      - clickhouse-data:/var/lib/clickhouse
-#
-#    healthcheck:
-#      test: [ "CMD","wget","--spider","http://localhost:8123/ping" ]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 10
-#
-#  otel-collector:
-#    image: otel/opentelemetry-collector-contrib:latest
-#    container_name: otel-collector
-#
-#    command:
-#      - "--config=/etc/otelcol/config.yaml"
-#
-#    ports:
-#      - "4317:4317"
-#      - "4318:4318"
-#
-#    volumes:
-#      - ./otel-config.yaml:/etc/otelcol/config.yaml:ro
-#
-#    depends_on:
-#      clickhouse:
-#        condition: service_healthy
-#
-#    restart: unless-stopped
-#
-#  grafana:
-#    image: grafana/grafana:latest
-#    container_name: grafana
-#
-#    ports:
-#      - "3000:3000"
-#
-#    restart: unless-stopped
-#
-#    depends_on:
-#      clickhouse:
-#        condition: service_healthy
-#
-#    volumes:
-#      - grafana-data:/var/lib/grafana
-#
-#volumes:
-#  mysql-data:
-#  clickhouse-data:
-#  grafana-data:
-
 services:
 
   backend:
-    build:
-      context: ./backend
+    image: sumitnjmsingh/creditbillingsystem-backend:v1.0.1
     container_name: credit-backend
 
     environment:
@@ -165,8 +32,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    build:
-      context: ./frontend
+    image: sumitnjmsingh/creditbillingsystem-frontend:v1.0.1
     container_name: credit-frontend
 
     ports:
@@ -248,9 +114,9 @@ services:
       - "9001:9000"
 
     environment:
-      CLICKHOUSE_DB: otel_2
-      CLICKHOUSE_USER: otel
-      CLICKHOUSE_PASSWORD: otel123
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB}
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
 
     volumes:
       - clickhouse-data2:/var/lib/clickhouse
@@ -262,6 +128,7 @@ services:
       retries: 10
 
   otel-producer:
+    platform: linux/amd64
 
     image: otel/opentelemetry-collector-contrib:0.156.0
 

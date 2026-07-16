@@ -1,17 +1,17 @@
 FROM node:22-slim AS builder
 
-ENV NODE_ENV=development
-ENV UV_THREADPOOL_SIZE=1
+#ENV NODE_ENV=development
+#ENV UV_THREADPOOL_SIZE=1
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm i
 
 COPY . .
 
-RUN NODE_ENV=production npm run build
+RUN npm run build
 
 
 FROM node:22-slim
